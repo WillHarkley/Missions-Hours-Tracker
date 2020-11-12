@@ -1,0 +1,81 @@
+Public Class frmAssignment2
+
+    'Name: Assignment 2
+    'Purpose: To keep record of mission work hours
+    'Programmer: William Harkley
+
+    Private Sub btnCalc_Click(sender As Object, e As EventArgs) Handles btnCalc.Click, lblTotalresults.VisibleChanged, lblTotalresults.Validated, lblRemainingresults.VisibleChanged, lblRemainingresults.Validated
+        'Define Variables
+
+        Dim hrs As Integer
+
+        Dim people As Integer
+
+
+        Dim total As Integer
+
+        Dim remain As Integer
+
+        Dim missions As Integer
+
+
+
+        Integer.TryParse(txtPpl.Text, people)
+        Integer.TryParse(txtHmh.Text, hrs)
+
+        If txtHmh.Text = "" Then
+            txtHmh.Focus()
+            Return
+        End If
+
+        If txtPpl.Text = "" Then
+            txtPpl.Focus()
+            Return
+        End If
+
+        Select Case True
+            Case radCooking.Checked
+                missions = 500
+            Case radItems.Checked
+                missions = 350
+            Case radConstruction.Checked
+                missions = 400
+            Case Else
+                MessageBox.Show("Please enter missions")
+                Return
+        End Select
+
+            'Calculate
+
+            total = hrs * people
+            remain = total - missions
+
+        If remain >= 0 Then
+            MessageBox.Show("Missions Complete!")
+            remain = 0
+        End If
+
+        lblRemainingresults.Text = remain
+            lblTotalresults.Text = total
+
+        'Display
+
+    End Sub
+
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        'this button clears all information on form
+        txtHmh.Text = ""
+        txtPpl.Text = ""
+        radCooking.Checked = False
+        radItems.Checked = False
+        radConstruction.Checked = False
+    End Sub
+
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        'this button closes the application
+        Me.Close()
+    End Sub
+
+
+End Class
